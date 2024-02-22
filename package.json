@@ -1,7 +1,7 @@
 {
   "name": "folded-history",
   "displayName": "Folded history",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Structured view of your browsing history.",
   "author": "manethpak.dev@gmail.com",
   "scripts": {
