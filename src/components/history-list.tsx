@@ -2,7 +2,7 @@ import _ from "lodash"
 import moment from "moment"
 import React from "react"
 
-import { getFavicon } from "~lib/utils"
+import { getFavicon, truncate } from "~lib/utils"
 import { useHistory } from "~providers/history-provider"
 
 import {
@@ -48,11 +48,11 @@ const HistoryList = () => {
                           className="max-w-[16rem] line-clamp-1 hover:underline"
                           href={item.url}
                           target="_blank">
-                          {item.title}
+                          {truncate(item.title || item.url)}
                         </a>
                       </div>
                       <p className="text-xs">
-                        {moment(item.lastVisitTime).format("DD/MM hh:mm A")}
+                        {moment(item.lastVisitTime).format("hh:mm A")}
                       </p>
                     </div>
                   ))}

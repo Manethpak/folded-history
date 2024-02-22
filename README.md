@@ -1,33 +1,23 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+# Folded History
 
-## Getting Started
+Folded History is a Chrome extension that provides an organized view of your browsing history, allowing you to navigate through your visited websites in a structured folder format. Instead of a traditional linear list, Folded History categorizes your browsing history based on domains, making it easier to find and revisit specific websites
 
-First, run the development server:
+<p align="center">
+  <img src=".github/docs/screenshot.png" />
+</p>
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+## Prerequisites
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+To use Folded History, you need to have the following installed:
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
+- A Chromium-based web browser (e.g., Google Chrome, Microsoft Edge)
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+## How to Install
 
-## Making production build
+To install the Folded History extension, follow these steps:
 
-Run the following:
+Currently it is not available on the Chrome Web store
 
-```bash
-pnpm build
-# or
-npm run build
-```
-
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
-
-## Submit to the webstores
-
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+1. Visit [Github Releases](https://github.com/Manethpak/folded-history/releases) page and download the latest version.
+2. Go to chrome [extension management](chrome://extensions/) and turn on developer mode.
+3. Select Load unpacked and upload the folder that you have have downloaded.

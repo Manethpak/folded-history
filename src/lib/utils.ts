@@ -12,3 +12,11 @@ export function getFavicon(url: string, size: string = "24"): string {
 export function getDomain(url: string | URL): string {
   return new URL(url).hostname
 }
+
+export function truncate(text: string): string {
+  if (text.length <= 30) {
+    return text
+  } else {
+    return text.slice(0, 30) + "..."
+  }
+}
