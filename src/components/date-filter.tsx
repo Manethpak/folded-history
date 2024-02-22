@@ -4,15 +4,10 @@ import React, { useCallback, useEffect, useState } from "react"
 import { useHistory } from "~providers/history-provider"
 
 import { Button } from "./ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "./ui/dropdown-menu"
+import { CalendarIcon } from "lucide-react"
+import { cn } from "~lib/utils"
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
+import { Calendar } from "./ui/calendar"
 
 const selectRange = [
   "Today",
@@ -25,62 +20,36 @@ const selectRange = [
 ]
 
 const DateFilter = () => {
-  const [range, setRange] = useState("Today")
+  const [date, setDate] = useState<Date>(new Date())
   const { setStartDate, setEndDate } = useHistory()
 
   useEffect(() => {
-    switch (range) {
-      case "Today":
-        setStartDate(+moment().startOf("day"))
-        setEndDate(undefined)
-        break
-
-      case "Yesterday":
-        let ytd = moment().subtract(1, "days")
-        setStartDate(+ytd.startOf("day"))
-        setEndDate(+ytd.endOf("day"))
-        break
-
-      case "This Week":
-        setStartDate(+moment().subtract(1, "weeks").startOf("day"))
-        setEndDate(undefined)
-        break
-
-      case "Last Week":
-        setStartDate(+moment().subtract(2, "weeks").startOf("day"))
-        setEndDate(+moment().subtract(1, "weeks").endOf("day"))
-        break
-
-      case "This Month":
-        setStartDate(+moment().subtract(1, "months").startOf("day"))
-        setEndDate(undefined)
-        break
-
-      case "Last Month":
-        setStartDate(+moment().subtract(2, "months").startOf("day"))
-        setEndDate(+moment().subtract(1, "months").startOf("day"))
-        break
-
-      default:
-        setStartDate(undefined)
-        setEndDate(undefined)
-        break
-    }
-  }, [range])
+    setStartDate(+moment(date).startOf("day"))
+    setEndDate(+moment(date).endOf("day"))
+  }, [date])
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button>{range}</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-44">
-        <DropdownMenuRadioGroup value={range} onValueChange={setRange}>
-          {selectRange.map((each) => (
-            <DropdownMenuRadioItem value={each}>{each}</DropdownMenuRadioItem>
-          ))}
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn("w-[140px] pl-3 text-left font-normal")}>
+          <span>{moment(date).format("DD-MM-YYYY")}</span>
+          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          disabled={(date) =>
+            date > new Date() || date < new Date("2000-01-01")
+          }
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
   )
 }
 
